@@ -11,6 +11,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.provider.Settings;
 import android.view.WindowManager.LayoutParams;
 import android.net.Uri;
 
@@ -42,6 +43,8 @@ public class CoreAndroidExtensions extends CordovaPlugin {
             uninstallApp(args.getString(0), callbackContext);
         } else if (action.equals("detectApp")) {
             detectApp(args.getString(0), callbackContext);
+        } else if (action.equals("checkOverlayActivated")) {
+            checkOverlayActivated(callbackContext);
         }
 
         return true;
@@ -92,6 +95,14 @@ public class CoreAndroidExtensions extends CordovaPlugin {
         } catch(PackageManager.NameNotFoundException e) {
             callbackContext.success(0);
         }
+    }
+
+    private void checkOverlayActivated(CallbackContext callbackContext) {
+        boolean canOverlay = false;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            canOverlay = Settings.canDrawOverlays(cordova.getContext());
+        }
+        callbackContext.success(canOverlay? 1 : 0);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

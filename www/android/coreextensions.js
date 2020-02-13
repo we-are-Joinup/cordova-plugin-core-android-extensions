@@ -28,5 +28,12 @@ module.exports = {
      */
     uninstallApp: function(packageName, successCallback, errorCallback) {
         return exec(successCallback, errorCallback, APP_PLUGIN_NAME, "uninstallApp", [packageName]);
+    },
+
+    /**
+     * Return check overlay is activated
+     */
+    checkOverlayActivated: function(successCallback) {
+        return exec(successCallback, null, APP_PLUGIN_NAME, "checkOverlayActivated");
     }
 };

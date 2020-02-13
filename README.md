@@ -15,6 +15,7 @@
 - `navigator.app.resumeApp`
 - `navigator.app.detectApp`
 - `navigator.app.uninstallApp`
+- `navigator.app.checkOverlayActivated`
 
 ### navigator.app.minimizeApp
 Shows home screen and sends the app into background
